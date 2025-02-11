@@ -15,7 +15,7 @@ router.put("/addmembers", addMemberValidator(), validateHandler, addMembers)
 router.put("/removemember", removeMemberValidator(), validateHandler, removeMember)
 
 router.delete("/leave/:id", chatIdValidator(), validateHandler, leaveGroup)
-router.post("/message", attachmentsMulter, sendAttachmentsValidator(), validateHandler, sendAttachments)
+router.post("/messages", attachmentsMulter, sendAttachmentsValidator(), validateHandler, sendAttachments)
 router.route("/:id").get(chatIdValidator(), validateHandler, getChatDetails)
         .put(renameValidator(), validateHandler, renameGroup)
         .delete(chatIdValidator(), validateHandler, deleteChat)

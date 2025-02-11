@@ -27,7 +27,7 @@ const registerUser = TryCatch(async (req, res, next) => {
     sendToken(res, user, 201, "User created successfully")
 })
 
-const loginUser = TryCatch(async (req, res, next) => {
+const loginUser = TryCatch(async (req, res) => {
     const { username, password } = req.body
 
     const user = await User.findOne({ username }).select("+password")

@@ -33,16 +33,19 @@ const getOrSaveFromStorage = ({ key, value, get }) => {
     if(get){
         try {
             const storedValue = localStorage.getItem(key)
-            return storedValue ? JSON.parse(storedValue) : null
+            if(!storedValue || storedValue === "undefined" || storedValue === "null")
+                return null
+    
+            return JSON.parse(storedValue)
         } catch (error) {
-            console.error(`Error parsing data from localstorage for key ${key}: ${error}`)
+            console.error(`Error parsing data from localstorage for key ${key}:`, error)
             return null
         }
     } else {
         try {
             localStorage.setItem(key, JSON.stringify(value))
         } catch (error) {
-            console.error(`Error saving data to localstorage for key ${key}: ${error}`)
+            console.error(`Error saving data to localstorage for key ${key}:`, error)
         }
     }
 }

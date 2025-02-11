@@ -3,17 +3,18 @@ import { v4 as uuid } from "uuid"
 import { v2 as cloudinary } from "cloudinary"
 import { getBase64, getSockets } from "../lib/socketHelper.js"
 
-const cookieOptions = {
-    maxAge: 15 * 24 * 60 * 60 * 1000,
-    httpOnly: true,
-    // secure: true,
-    sameSite: 'none',
-}
 
 const emitEvent = (req, event, users, data) => {
     const io = req.app.get("io")
     const usersSocket = getSockets(users)
     io.to(usersSocket).emit(event, data)
+}
+
+const cookieOptions = {
+    maxAge: 15 * 24 * 60 * 60 * 1000,
+    httpOnly: true,
+    // secure: true,
+    sameSite: 'lax',
 }
 const sendToken = (res, user, code, message) => {
     const token = jwt.sign({

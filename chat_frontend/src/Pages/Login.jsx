@@ -55,7 +55,12 @@ const Login = () => {
           username: username.value,
           password: password.value,
         },
-        config
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
       dispatch(userExists(data.user));
       toast.success(data.message, {
